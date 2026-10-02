@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Usability Analytics — Session Dashboard</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dashboard/dashboard.css">
+</head>
+
+<body>
+
+<a class="skip-link" href="#main">Skip to the dashboard</a>
+
+<div class="shell">
+
+  <!-- ============================ sidebar ============================ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>
+        </svg>
+      </span>
+      <span class="brand-text">
+        <strong>Usability</strong>
+        <small>Analytics console</small>
+      </span>
+    </div>
+
+    <nav class="side-nav" aria-label="Dashboard sections">
+      <a class="side-link is-active" href="#section-summary"><span class="side-ico" aria-hidden="true">◍</span> Summary</a>
+      <a class="side-link" href="#section-behaviour"><span class="side-ico" aria-hidden="true">◴</span> Behaviour</a>
+      <a class="side-link" href="#section-attention"><span class="side-ico" aria-hidden="true">◎</span> Attention</a>
+      <a class="side-link" href="#section-problems"><span class="side-ico" aria-hidden="true">△</span> Problems</a>
+      <a class="side-link" href="#section-raw"><span class="side-ico" aria-hidden="true">▤</span> Raw events</a>
+    </nav>
+
+    <div class="side-foot">
+      <a class="side-cta" href="index.html">
+        <span>Open the demo page</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <p class="side-note">Data is read from this browser only. Nothing is uploaded.</p>
+    </div>
+  </aside>
+
+  <!-- ============================= main ============================= -->
+  <div class="main-col">
+
+    <header class="topbar">
+      <button class="icon-btn only-mobile" id="menu-toggle" type="button" aria-label="Show sections">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+
+      <div class="topbar-text">
+        <h1>Session dashboard</h1>
+        <p id="session-subtitle">Loading session data…</p>
+      </div>
+
+      <div class="topbar-actions">
+        <span class="live-pill" id="live-pill" hidden><i></i> Live</span>
+        <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch between light and dark">
+          <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 13A9 9 0 1111 3a7 7 0 1010 10z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- One filter row, above everything it scopes -->
+    <div class="filter-row" role="group" aria-label="Dashboard filters">
+      <div class="filter">
+        <label for="session-select">Session</label>
+        <div class="select-wrap">
+          <select id="session-select" aria-label="Choose a recorded session"></select>
+        </div>
+      </div>
+
+      <div class="filter">
+        <label for="range-select">Time range</label>
+        <div class="select-wrap">
+          <select id="range-select" aria-label="Limit the dashboard to part of the session">
+            <option value="all">Whole session</option>
+            <option value="60">Last 60 seconds</option>
+            <option value="30">Last 30 seconds</option>
+            <option value="10">Last 10 seconds</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="filter-spacer"></div>
+
+      <button class="btn ghost" id="refresh-btn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 11-3-6.7M21 4v5h-5"/></svg>
+        Refresh
+      </button>
+      <button class="btn" id="export-btn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 11l5 5 5-5M4 20h16"/></svg>
+        Export JSON
+      </button>
+    </div>
+
+    <main class="content" id="main">
+      <!-- Rendered by dashboard.js -->
+      <div class="empty-screen" id="empty-screen">
+        <div class="empty-art" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+        </div>
+        <h2>No sessions recorded yet</h2>
+        <p>Open the demo page, click around for a few seconds, then come back. This dashboard reads whatever the tracker has saved in this browser.</p>
+        <a class="btn" href="index.html">Open the demo page</a>
+      </div>
+
+      <div id="board" hidden></div>
+    </main>
+
+    <footer class="page-foot">
+      <span>Usability Tracker — HCI assignment</span>
+      <span id="foot-meta"></span>
+    </footer>
+
+  </div>
+</div>
+
+<script src="dashboard/palette.js"></script>
+<script src="dashboard/charts.js"></script>
+<script src="dashboard/dashboard.js"></script>
+
+</body>
+</html>
